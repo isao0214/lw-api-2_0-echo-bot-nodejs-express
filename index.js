@@ -44,8 +44,8 @@ app.post('/callback', verifyBody, async (req, res, next) => {
 
     if (!global_data.hasOwnProperty("access_token")) {
         // Get access token
-        console.debug("Get access token")
-        accessToken = await lineworks.getAccessToken(clientId, clientSecret, serviceAccount, privatekey, scope)
+        console.debug("Get access token");
+        const accessToken = await lineworks.getAccessToken(clientId, clientSecret, serviceAccount, privatekey, scope);
         global_data["access_token"] = accessToken
     }
 
@@ -72,7 +72,7 @@ app.post('/callback', verifyBody, async (req, res, next) => {
                     if (errBody["code"] == "UNAUTHORIZED") {
                         // Get access token
                         console.debug("Update access token")
-                        accessToken = await lineworks.getAccessToken(clientId, clientSecret, serviceAccount, privatekey, scope)
+                        const accessToken = await lineworks.getAccessToken(clientId, clientSecret, serviceAccount, privatekey, scope)
                         global_data["access_token"] = accessToken
                     } else {
                         res.status(500).send({ errorMsg: error.message })
